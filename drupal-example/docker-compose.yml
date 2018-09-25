@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  drupal:
+    image: drupal:8-apache
+    ports:
+      - 8080:80
+    volumes: # from https://docs.docker.com/samples/library/drupal/#volumes
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+    environment:
+      - http_proxy=http://10.113:55:120:8080
+      - https_proxy=http://10.113:55:120:8080
+    restart: always
+  postgres:
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=my_password
+      - http_proxy=http://10.113:55:120:8080
+      - https_proxy=http://10.113:55:120:8080
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:

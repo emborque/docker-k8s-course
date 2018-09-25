@@ -1,0 +1,12 @@
+#usu node:6-alpine image
+#expose port 3000
+#add tini package apk add --update tini
+#create a folder mkdir -p /usr/src/app
+
+#set previous folder as working dir
+
+#copy package.json
+#exec npm install && npm cache clean
+#copy all files
+
+#execute a command "tini", "--", "node", "./bin/www"
